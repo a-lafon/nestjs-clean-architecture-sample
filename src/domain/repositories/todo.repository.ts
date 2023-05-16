@@ -1,9 +1,9 @@
-import { Todo } from '../entities/todo.entity';
+import { Todo } from '../model/todo.model';
 
-export interface TodoRepositoyry {
+export interface TodoRepository {
   create(todo: Todo): Promise<Todo>;
   findById(id: number): Promise<Todo | null>;
   findAll(): Promise<Todo[]>;
-  update(todo: Todo): Promise<Todo>;
-  delete(todo: Todo): Promise<void>;
+  update(id: number, todo: Todo): Promise<Todo>;
+  delete(id: number): Promise<void>;
 }

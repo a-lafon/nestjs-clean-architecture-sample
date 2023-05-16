@@ -1,13 +1,14 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import dbConfig from './db.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RepositoriesModule } from '../repositories/repositories.module';
 
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [dbConfig],
-      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -24,6 +25,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
       inject: [ConfigService],
     }),
+    RepositoriesModule,
   ],
+  exports: [RepositoriesModule],
 })
 export class DbModule {}
