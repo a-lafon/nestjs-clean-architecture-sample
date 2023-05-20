@@ -8,6 +8,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateTodoUsecase } from 'src/usecases/todo/create-todo.usecase';
@@ -17,6 +18,7 @@ import { CreateTodoDto, UpdateTodoDto } from './todo.dto';
 import { Todo } from 'src/domain/model/todo.model';
 import { UpdateTodoUsecase } from 'src/usecases/todo/update-todo.usecase';
 import { DeleteTodoUsecase } from 'src/usecases/todo/delete-todo.usecase';
+import { AuthGuard } from 'src/infrastructure/guards/auth.guard';
 
 @ApiTags('todo')
 @Controller('todo')
@@ -38,11 +40,13 @@ export class TodoController {
     return todo;
   }
 
+  @UseGuards(AuthGuard)
   @Get()
   async getAll() {
     return await this.getTodosUsecase.exec();
   }
 
+  @UseGuards(AuthGuard)
   @Post()
   async create(@Body() body: CreateTodoDto) {
     const todo = new Todo();
@@ -52,6 +56,7 @@ export class TodoController {
     return await this.createTodosUsecase.exec(todo);
   }
 
+  @UseGuards(AuthGuard)
   @Patch(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,
@@ -65,6 +70,7 @@ export class TodoController {
     return await this.updateTodosUsecase.exec(id, newTodo);
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
     return await this.deleteTodosUsecase.exec(id);
