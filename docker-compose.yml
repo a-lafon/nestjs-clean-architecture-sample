@@ -10,3 +10,19 @@ services:
       - "5432:5432"
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USERNAME: admin
+      DB_PASSWORD: password
+      DB_DATABASE: nestjs
+      DB_PORT: 5432
+      JWT_SECRET: myjwtsecret
