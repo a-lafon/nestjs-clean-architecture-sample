@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IJwtService } from 'src/domain/adapters/jwt.interface';
-import { UserRepository } from 'src/domain/repositories/user.repository';
+import { IJwtService } from '../../domain/adapters/jwt.interface';
+import { UserRepository } from '../../domain/repositories/user.repository';
 import {
   JWT_SERVICE_TOKEN,
   USER_REPOSITORY_TOKEN,
-} from 'src/infrastructure/constants';
+} from '../../infrastructure/constants';
 
 @Injectable()
 export class IsAuthenticatedUsecase {

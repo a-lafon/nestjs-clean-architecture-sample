@@ -1,14 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IBcryptService } from 'src/domain/adapters/bcrypt.interface';
-import { IExceptionService } from 'src/domain/adapters/exception.interface';
-import { IJwtService } from 'src/domain/adapters/jwt.interface';
-import { UserRepository } from 'src/domain/repositories/user.repository';
+import { IBcryptService } from '../../domain/adapters/bcrypt.interface';
+import { IExceptionService } from '../../domain/adapters/exception.interface';
+import { IJwtService } from '../../domain/adapters/jwt.interface';
+import { UserRepository } from '../../domain/repositories/user.repository';
 import {
   BCRYPT_SERVICE_TOKEN,
   EXCEPTION_SERVICE_TOKEN,
   JWT_SERVICE_TOKEN,
   USER_REPOSITORY_TOKEN,
-} from 'src/infrastructure/constants';
+} from '../../infrastructure/constants';
 
 @Injectable()
 export class LoginUsecase {
