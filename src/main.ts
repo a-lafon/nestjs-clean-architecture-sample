@@ -16,6 +16,14 @@ async function bootstrap() {
     .setTitle('Nestjs clean architecture sample')
     .setDescription('A clean architecture sample')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+      'access-token',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);

@@ -11,7 +11,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { CreateTodoUsecase } from 'src/usecases/todo/create-todo.usecase';
 import { GetTodoUsecase } from 'src/usecases/todo/get-todo.usecase';
 import { GetTodosUsecase } from 'src/usecases/todo/get-todos.usecase';
@@ -24,6 +24,7 @@ import { IExceptionService } from 'src/domain/adapters/exception.interface';
 import { EXCEPTION_SERVICE_TOKEN } from 'src/infrastructure/constants';
 
 @ApiTags('todo')
+@ApiSecurity('access-token')
 @Controller('todo')
 export class TodoController {
   constructor(
