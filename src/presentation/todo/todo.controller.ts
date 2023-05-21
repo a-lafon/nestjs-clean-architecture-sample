@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   NotFoundException,
   Param,
   ParseIntPipe,
@@ -19,6 +20,8 @@ import { Todo } from 'src/domain/model/todo.model';
 import { UpdateTodoUsecase } from 'src/usecases/todo/update-todo.usecase';
 import { DeleteTodoUsecase } from 'src/usecases/todo/delete-todo.usecase';
 import { AuthGuard } from 'src/infrastructure/guards/auth.guard';
+import { IExceptionService } from 'src/domain/adapters/exception.interface';
+import { EXCEPTION_SERVICE_TOKEN } from 'src/infrastructure/constants';
 
 @ApiTags('todo')
 @Controller('todo')
@@ -29,13 +32,16 @@ export class TodoController {
     private readonly createTodosUsecase: CreateTodoUsecase,
     private readonly updateTodosUsecase: UpdateTodoUsecase,
     private readonly deleteTodosUsecase: DeleteTodoUsecase,
+    @Inject(EXCEPTION_SERVICE_TOKEN)
+    private readonly exceptionService: IExceptionService,
   ) {}
 
+  @UseGuards(AuthGuard)
   @Get(':id')
   async getOne(@Param('id', ParseIntPipe) id: number) {
     const todo = await this.getTodoUsecase.exec(id);
     if (!todo) {
-      throw new NotFoundException();
+      return this.exceptionService.notFoundException();
     }
     return todo;
   }

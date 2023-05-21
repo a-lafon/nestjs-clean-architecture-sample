@@ -1,9 +1,11 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { IBcryptService } from 'src/domain/adapters/bcrypt.interface';
+import { IExceptionService } from 'src/domain/adapters/exception.interface';
 import { IJwtService } from 'src/domain/adapters/jwt.interface';
 import { UserRepository } from 'src/domain/repositories/user.repository';
 import {
   BCRYPT_SERVICE_TOKEN,
+  EXCEPTION_SERVICE_TOKEN,
   JWT_SERVICE_TOKEN,
   USER_REPOSITORY_TOKEN,
 } from 'src/infrastructure/constants';
@@ -21,13 +23,15 @@ export class LoginUsecase {
     private readonly bcryptService: IBcryptService,
     @Inject(JWT_SERVICE_TOKEN)
     private readonly jwtService: IJwtService,
+    @Inject(EXCEPTION_SERVICE_TOKEN)
+    private readonly exceptionService: IExceptionService,
   ) {}
 
   async exec(email: string, password: string) {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      return this.exceptionService.unauthorizedException('Invalid credentials');
     }
 
     const isPasswordValid = await this.bcryptService.compare(
@@ -36,7 +40,7 @@ export class LoginUsecase {
     );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials');
+      return this.exceptionService.unauthorizedException('Invalid credentials');
     }
 
     const accessToken = this.jwtService.sign(
