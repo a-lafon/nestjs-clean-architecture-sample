@@ -7,8 +7,6 @@
                     |__/                                                                
 ```
 
-# nestjs-clean-architecture-sample
-
 This project is designed to experiment with Clean Architecture using NestJS, a JavaScript/TypeScript framework for building scalable and modular backend applications.
 
 The main objective of this project is to implement the features of task creation (todos) and authentication, while adhering to the principles of Clean Architecture.

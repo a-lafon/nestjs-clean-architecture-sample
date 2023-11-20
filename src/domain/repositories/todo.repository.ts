@@ -7,3 +7,5 @@ export interface TodoRepository {
   update(id: number, todo: Todo): Promise<Todo>;
   delete(id: number): Promise<void>;
 }
+
+export const TodoRepository = Symbol('TodoRepository');

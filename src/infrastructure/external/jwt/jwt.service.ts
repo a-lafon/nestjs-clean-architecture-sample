@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { IJwtService, JwtOptions } from 'src/domain/adapters/jwt.interface';
+import {
+  IJwtService,
+  JwtOptions,
+} from '../../../domain/adapters/jwt.interface';
 import * as jwt from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
@@ -11,7 +14,7 @@ export class JwtService implements IJwtService {
     private readonly jwtService: jwt.JwtService,
     private readonly configService: ConfigService,
   ) {
-    this.secret = this.configService.get<string>('jwt.secret');
+    this.secret = this.configService.getOrThrow<string>('jwt.secret');
   }
 
   sign(payload: object, options?: JwtOptions): string {

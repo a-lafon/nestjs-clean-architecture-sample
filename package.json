@@ -1,7 +1,7 @@
 {
   "name": "nestjs-clean-architecture-sample",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "This project is designed to experiment with Clean Architecture using NestJS for building scalable and modular backend applications",
   "author": "",
   "private": true,
   "license": "UNLICENSED",

@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { DocService } from './infrastructure/doc/doc.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,21 +12,7 @@ async function bootstrap() {
     }),
   );
 
-  const config = new DocumentBuilder()
-    .setTitle('Nestjs clean architecture sample')
-    .setDescription('A clean architecture sample')
-    .setVersion('1.0')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-      'access-token',
-    )
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('doc', app, document);
+  app.get(DocService).serve('/doc', app);
 
   await app.listen(3000);
 }

@@ -5,3 +5,5 @@ export interface UserRepository {
   findByEmail(email: string): Promise<User>;
   findById(id: number): Promise<User>;
 }
+
+export const UserRepository = Symbol('UserRepository');

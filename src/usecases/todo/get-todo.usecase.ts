@@ -1,12 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Todo } from 'src/domain/model/todo.model';
-import { TodoRepository } from 'src/domain/repositories/todo.repository';
-import { TODO_REPOSITORY_TOKEN } from 'src/infrastructure/constants';
+import { Todo } from '../../domain/model/todo.model';
+import { TodoRepository } from '../../domain/repositories/todo.repository';
 
 @Injectable()
 export class GetTodoUsecase {
   constructor(
-    @Inject(TODO_REPOSITORY_TOKEN)
+    @Inject(TodoRepository)
     private readonly todoRepository: TodoRepository,
   ) {}
 

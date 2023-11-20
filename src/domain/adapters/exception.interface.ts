@@ -4,3 +4,5 @@ export interface IExceptionService {
   notFoundException(message?: string): void;
   unauthorizedException(message?: string): void;
 }
+
+export const IExceptionService = Symbol('IExceptionService');

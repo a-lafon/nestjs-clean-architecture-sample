@@ -3,12 +3,6 @@ import { IBcryptService } from '../../domain/adapters/bcrypt.interface';
 import { IExceptionService } from '../../domain/adapters/exception.interface';
 import { IJwtService } from '../../domain/adapters/jwt.interface';
 import { UserRepository } from '../../domain/repositories/user.repository';
-import {
-  BCRYPT_SERVICE_TOKEN,
-  EXCEPTION_SERVICE_TOKEN,
-  JWT_SERVICE_TOKEN,
-  USER_REPOSITORY_TOKEN,
-} from '../../infrastructure/constants';
 
 @Injectable()
 export class LoginUsecase {
@@ -17,13 +11,13 @@ export class LoginUsecase {
   private readonly refreshTokenExpireIn = '1d';
 
   constructor(
-    @Inject(USER_REPOSITORY_TOKEN)
+    @Inject(UserRepository)
     private readonly userRepository: UserRepository,
-    @Inject(BCRYPT_SERVICE_TOKEN)
+    @Inject(IBcryptService)
     private readonly bcryptService: IBcryptService,
-    @Inject(JWT_SERVICE_TOKEN)
+    @Inject(IJwtService)
     private readonly jwtService: IJwtService,
-    @Inject(EXCEPTION_SERVICE_TOKEN)
+    @Inject(IExceptionService)
     private readonly exceptionService: IExceptionService,
   ) {}
 

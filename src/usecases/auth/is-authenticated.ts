@@ -1,17 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IJwtService } from '../../domain/adapters/jwt.interface';
 import { UserRepository } from '../../domain/repositories/user.repository';
-import {
-  JWT_SERVICE_TOKEN,
-  USER_REPOSITORY_TOKEN,
-} from '../../infrastructure/constants';
 
 @Injectable()
 export class IsAuthenticatedUsecase {
   constructor(
-    @Inject(USER_REPOSITORY_TOKEN)
+    @Inject(UserRepository)
     private readonly userRepository: UserRepository,
-    @Inject(JWT_SERVICE_TOKEN)
+    @Inject(IJwtService)
     private readonly jwtService: IJwtService,
   ) {}
 

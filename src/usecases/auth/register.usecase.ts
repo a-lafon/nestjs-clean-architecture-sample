@@ -2,17 +2,13 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IBcryptService } from '../../domain/adapters/bcrypt.interface';
 import { User } from '../../domain/model/user.model';
 import { UserRepository } from '../../domain/repositories/user.repository';
-import {
-  BCRYPT_SERVICE_TOKEN,
-  USER_REPOSITORY_TOKEN,
-} from '../../infrastructure/constants';
 
 @Injectable()
 export class RegisterUsecase {
   constructor(
-    @Inject(USER_REPOSITORY_TOKEN)
+    @Inject(UserRepository)
     private readonly userRepository: UserRepository,
-    @Inject(BCRYPT_SERVICE_TOKEN)
+    @Inject(IBcryptService)
     private readonly bcryptService: IBcryptService,
   ) {}
 
