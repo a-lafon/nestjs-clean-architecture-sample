@@ -22,7 +22,7 @@ The code in this project is organized following the structure of Clean Architect
 
 The folder structure is as follows:
 
-- **UseCases**: This folder contains the use cases of the application. Each use case represents a specific functionality of the application, such as task creation or authentication. Use cases define the interactions between the different layers of the architecture. Tests for the use cases are included in the usecase folder as usecase.spec.ts. This project includes tests specifically for authentication.
+- **Usecases**: This folder contains the use cases of the application. Each use case represents a specific functionality of the application, such as task creation or authentication. Use cases define the interactions between the different layers of the architecture.
 - **Domain**: This folder contains the domain entities of the application, such as the User and Todo models. The domain entities encapsulate the domain rules and are independent of implementation details.
 - **Infrastructure**: This folder contains the concrete implementations of the interfaces defined in the domain. It also includes external adapters, such as the encryption service (bcrypt) and exception services. The infrastructure is responsible for interfacing with external libraries and services.
 - **Presentation**: This folder contains the controllers and routes of the application. It is the user interface layer that handles HTTP requests and calls the appropriate use cases to process the requests.
@@ -53,10 +53,16 @@ Then play with [api on localhost:3000](http://localhost:3000/doc).
 
 ## Running tests
 
-To run the unit tests for the authentication use cases, use the following command:
+To run the unit tests use the following command:
 
 ```
 npm run test
+```
+
+Run with coverage:
+
+```
+npm run test:cov
 ```
 
 ## Swagger Documentation

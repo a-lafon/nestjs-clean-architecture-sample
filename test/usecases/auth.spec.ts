@@ -1,11 +1,11 @@
-import { UserRepository } from '../../domain/repositories/user.repository';
-import { LoginUsecase } from './login.usecase';
-import { IBcryptService } from '../../domain/adapters/bcrypt.interface';
-import { IExceptionService } from '../../domain/adapters/exception.interface';
-import { IJwtService } from '../../domain/adapters/jwt.interface';
-import { User } from '../../domain/model/user.model';
-import { RegisterUsecase } from './register.usecase';
-import { IsAuthenticatedUsecase } from './is-authenticated';
+import { UserRepository } from '../../src/domain/repositories/user.repository';
+import { LoginUsecase } from '../../src/usecases/auth/login.usecase';
+import { IBcryptService } from '../../src/domain/adapters/bcrypt.interface';
+import { IExceptionService } from '../../src/domain/adapters/exception.interface';
+import { IJwtService } from '../../src/domain/adapters/jwt.interface';
+import { User } from '../../src/domain/model/user.model';
+import { RegisterUsecase } from '../../src/usecases/auth/register.usecase';
+import { IsAuthenticatedUsecase } from '../../src/usecases/auth/is-authenticated';
 
 describe('AuthUsecase', () => {
   let userRepository: UserRepository;
